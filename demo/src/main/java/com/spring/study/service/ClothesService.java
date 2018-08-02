@@ -6,12 +6,13 @@ import java.util.Map;
 
 public interface ClothesService {
     BaseResponse init();
-    BaseResponse initAdd();
-    BaseListResponse add(ClothesList<Clothes> clothesList);
+    BaseResponse initClothes();
+    BaseListResponse add(ClothesListRequest<Clothes> clothesListRequest);
     BaseResponse delete(String name);
-    Map<String, Object> recommend();
+    ClothesResponse recommend();
     boolean dummyAdd();
     boolean deleteAll();
-    ClothesResponse find(String name);
-    BaseListResponse findAll();
+    ClothesResponse getClothes(String name);
+    ClothesResponse update(ClothesRequest clothesRequest);
+    BaseListResponse getList();
 }

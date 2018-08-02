@@ -35,7 +35,7 @@ public class ClothesServiceImpl implements ClothesService {
     //초기화하고 기본 데이터를 추가한다.
     @Override
     @Transactional
-    public BaseResponse initAdd() {
+    public BaseResponse initClothes() {
         BaseResponse baseResponse = new BaseResponse();
         boolean resultDelete = false;
         boolean resultAdd = false;
@@ -69,9 +69,9 @@ public class ClothesServiceImpl implements ClothesService {
     //옷 추가
     @Override
     @Transactional
-    public BaseListResponse add(ClothesList<Clothes> clothesList) {
+    public BaseListResponse add(ClothesListRequest<Clothes> clothesListRequest) {
         BaseListResponse baseListResponse = new BaseListResponse();
-        List<Clothes> list = clothesList.getList();
+        List<Clothes> list = clothesListRequest.getList();
         Long size = clothesRepository.count();
         int listSize = list.size();
         if( listSize > 0) {
@@ -92,7 +92,7 @@ public class ClothesServiceImpl implements ClothesService {
 
     //옷 검색
     @Override
-    public ClothesResponse find(String name) {
+    public ClothesResponse getClothes(String name) {
         ClothesResponse clothesResponse = new ClothesResponse();
         Clothes clothes = null;
         clothes = clothesRepository.findByName(name);
@@ -107,8 +107,9 @@ public class ClothesServiceImpl implements ClothesService {
 
     }
 
+    //옷 전체 리스트를 가져온다.
     @Override
-    public BaseListResponse findAll() {
+    public BaseListResponse getList() {
         BaseListResponse baseListResponse = new BaseListResponse();
         List<Clothes> list = null;
 
@@ -127,10 +128,31 @@ public class ClothesServiceImpl implements ClothesService {
 
     }
 
+    //옷을 수정한다.
     @Override
-    public Map<String, Object> recommend() {
-        Map<String, Object> map = new HashMap<>();
-        return map;
+    public ClothesResponse update(ClothesRequest clothesRequest) {
+        ClothesResponse clothesResponse = new ClothesResponse();
+        Clothes clothes = null;
+        Clothes result = null;
+        clothes = clothesRepository.findByName(clothesRequest.getBefore());
+        if(clothes != null) {
+            clothes.setName(clothesRequest.getAfter());
+            result = clothesRepository.save(clothes);
+        }
+        if(result != null) {
+            clothesResponse.setResult("success");
+            clothesResponse.setClothes(clothes);
+        } else {
+            clothesResponse.setResult("fail");
+        }
+        return clothesResponse;
+    }
+
+    //옷을 추천 받는다
+    @Override
+    public ClothesResponse recommend() {
+        ClothesResponse clothesResponse = new ClothesResponse();
+        return clothesResponse;
     }
 
     //데이터를 h2에 저장

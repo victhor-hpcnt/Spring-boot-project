@@ -15,7 +15,7 @@ public class Clothes {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique=true)
     private String name;
 
     @Column(name = "recommendation_id", nullable = false)
@@ -23,6 +23,18 @@ public class Clothes {
 
     public Long getId() {
         return  this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRecommendationId(int recommendationId) {
+        this.recommendationId = recommendationId;
     }
 
     public String getName() {
