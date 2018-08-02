@@ -84,8 +84,8 @@ public class ClothesController {
             @ApiResponse(code = 200, message = "갱신 성공"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
-    @PutMapping(path = "/clothes")
-    public ClothesResponse update(@RequestBody ClothesRequest clothesRequest) {
+    @PutMapping(path = "/clothes/{name}")
+    public ClothesResponse update(@PathVariable(value = "name") String name, @RequestBody ClothesRequest clothesRequest) {
         return clothesService.update(clothesRequest);
     }
 
@@ -94,7 +94,7 @@ public class ClothesController {
             @ApiResponse(code = 200, message = "추천 성공"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
-    @PutMapping(path = "/clothes/recommendation")
+    @GetMapping(path = "/clothes/recommendation")
     public ClothesResponse recommend() {
         return clothesService.recommend();
     }
