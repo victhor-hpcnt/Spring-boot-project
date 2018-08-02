@@ -112,12 +112,12 @@ public class ClothesServiceImpl implements ClothesService {
     public BaseListResponse getList() {
         BaseListResponse baseListResponse = new BaseListResponse();
         List<Clothes> list = null;
-
+        int listSize = 0;
         list = clothesRepository.findAll();
 
-        int listSize = list.size();
+        listSize = list.size();
 
-        if(list != null) {
+        if(listSize > 0) {
             baseListResponse.setResult("success");
             baseListResponse.setCount(listSize);
             baseListResponse.setList(list);
@@ -152,6 +152,21 @@ public class ClothesServiceImpl implements ClothesService {
     @Override
     public ClothesResponse recommend() {
         ClothesResponse clothesResponse = new ClothesResponse();
+        List<Clothes> list = null;
+        int num = 0;
+        int listSize = 0;
+        Random random = new Random();
+        list = clothesRepository.findAll();
+
+        listSize = list.size();
+
+        if(listSize > 0) {
+            num = random.nextInt(listSize);
+            clothesResponse.setClothes(list.get(num));
+            clothesResponse.setResult("success");
+        } else {
+            clothesResponse.setResult("fail");
+        }
         return clothesResponse;
     }
 

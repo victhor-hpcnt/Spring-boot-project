@@ -89,9 +89,9 @@ public class ClothesController {
         return clothesService.update(clothesRequest);
     }
 
-    @ApiOperation(value = "Clothes delete", notes = "옷을 수정한다.")
+    @ApiOperation(value = "Clothes recommend", notes = "옷을 추천한다.")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "갱신 성공"),
+            @ApiResponse(code = 200, message = "추천 성공"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @PutMapping(path = "/clothes/recommendation")
