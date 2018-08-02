@@ -1,11 +1,10 @@
 package com.spring.study.domain;
 
-
-import lombok.*;
-import org.hibernate.annotations.Table;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
-
 
 @Data
 @Entity
@@ -21,6 +20,17 @@ public class Clothes {
 
     @Column(name = "recommendation_id", nullable = false)
     private  int recommendationId;
+
+    public Long getId() {
+        return  this.id;
+    }
+
+    public String getName() {
+        return  this.name;
+    }
+    public int getRecommendationId() {
+        return  this.recommendationId;
+    }
 
     public Clothes() {}
 

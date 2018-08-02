@@ -7,4 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository("ClothesRepository")
 public interface ClothesRepository extends JpaRepository<Clothes, Long> {
+    Clothes findByName(String name);
+    @Transactional
+    Long deleteByName(String name);
 }
